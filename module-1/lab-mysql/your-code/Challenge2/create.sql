@@ -19,11 +19,11 @@ USE `Car_store` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Car_store`.`car` (
   `car_id` INT NOT NULL AUTO_INCREMENT,
+  `vin` VARCHAR(45) NOT NULL,
   `manufacturer` VARCHAR(45) NOT NULL,
   `model` VARCHAR(45) NOT NULL,
   `year` INT NOT NULL,
   `color` VARCHAR(45) NOT NULL,
-  `vin` INT NOT NULL,
   PRIMARY KEY (`car_id`))
 ENGINE = InnoDB;
 
@@ -33,6 +33,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Car_store`.`customer` (
   `customer_id` INT NOT NULL AUTO_INCREMENT,
+  `customer_iden` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `phone` INT NULL,
   `email` VARCHAR(45) NOT NULL,
@@ -41,7 +42,6 @@ CREATE TABLE IF NOT EXISTS `Car_store`.`customer` (
   `state/province` VARCHAR(45) NOT NULL,
   `country` VARCHAR(45) NOT NULL,
   `zip/postal code` VARCHAR(45) NOT NULL,
-  `id` INT NOT NULL,
   PRIMARY KEY (`customer_id`))
 ENGINE = InnoDB;
 
@@ -50,11 +50,11 @@ ENGINE = InnoDB;
 -- Table `Car_store`.`salesperson`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Car_store`.`salesperson` (
+  `salesperson_id` INT NOT NULL,
   `staff_id` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `store` VARCHAR(45) NOT NULL,
-  `id` INT NOT NULL,
-  PRIMARY KEY (`staff_id`))
+  PRIMARY KEY (`salesperson_id`))
 ENGINE = InnoDB;
 
 
@@ -63,10 +63,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Car_store`.`invoice` (
   `invoice_number` INT NOT NULL,
+  `invoice_number` INT NOT NULL,
   `date` DATETIME NOT NULL,
   `car_car_id` INT NOT NULL,
   `salesperson_staff_id` INT NOT NULL,
-  `invoice_number` INT NOT NULL,
   `customer_customer_id` INT NOT NULL,
   PRIMARY KEY (`invoice_number`),
   INDEX `fk_invoice_car_idx` (`car_car_id` ASC) VISIBLE,
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `Car_store`.`invoice` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_invoice_salesperson1`
     FOREIGN KEY (`salesperson_staff_id`)
-    REFERENCES `Car_store`.`salesperson` (`staff_id`)
+    REFERENCES `Car_store`.`salesperson` (`salesperson_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_invoice_customer1`
